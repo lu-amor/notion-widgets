@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <title>Time Left in this month</title>
+    <style>
+        body{
+            text-align: center;
+            font-family: arsenal;
+            background-color: #e3d5ca;
+        }
+        #counter{
+            margin-top: 50%;
+        }
+        h2{
+            display: inline-block;
+            margin-right: 10px;
+            margin-block-start: 5px;
+            margin-bottom: 10px;
+        }
+        h3{
+            margin-top: 0px;
+            display: inline-block;
+            
+        }
+        .small{
+            font-size: 15px;
+            font-weight: lighter;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="counter">
+
+        <h2 id="months"></h2>
+        <h2 id="days"></h2>
+        <br/>
+        <h3>
+            until vacation
+        </h3>
+    </div>
+
+<script>
+    function CountDownTimer  () {
+        left_months = document.getElementById("months");
+        left_days = document.getElementById("days");
+    }
+
+    targetDate = new Date("2024-12-19T23:59:59");
+
+    function showRemaining() {
+        now = new Date();
+        distance = targetDate - now;
+
+        if (distance < 0) {
+            clearInterval(timer);
+            left_months.innerHTML = "0<span class=\"small\"> months </span>";
+            left_days.innerHTML = "0<span class=\"small\"> days </span>";
+            return;
+        }
+
+        days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        months = Math.floor(days / 30);
+        days = days % 30;
+
+        left_months.innerHTML = months + "<span class=\"small\"> months </span>";
+        left_days.innerHTML = days + "<span class=\"small\"> days </span>";
+    }
+
+timer = setInterval (showRemaining, 1000) 
+CountDownTimer() ;
+</script>
+</body>
+</html>
