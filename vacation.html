@@ -11,24 +11,26 @@
             text-align: center;
             font-family: arsenal;
             background-color: #ffffff;
-            margin-top: 0; /* Ajusta el margen superior */
+            align-content: center;
+            justify-content: center;
         }
         #counter{
-            height: 60px;
+            align-content: center;
+            display: inline-block;
+            margin-top: 7%;
         }
         h2{
             display: inline-block;
             margin-right: 10px;
-            margin-block-start: 5px;
             margin-bottom: 10px;
+            font-size: 2rem;
         }
         h3{
             margin-top: 0px;
-            display: inline-block;
             
         }
         .small{
-            font-size: 15px;
+            font-size: 1.5rem;
             font-weight: lighter;
         }
     </style>
@@ -49,7 +51,7 @@
         left_days = document.getElementById("days");
     }
 
-    targetDate = new Date("2024-12-19T23:59:59");
+    targetDate = new Date("2025-04-13T23:59:59");
 
     function showRemaining() {
         now = new Date();
