@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <title>Pomodoro Timer</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arsenal', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #counter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="counter">
+        <h2 id="time">25:00</h2>
+        <button id="startButton">Start</button>
+    </div>
+
+    <script>
+        function CountDownTimer() {
+            var time = 1500; // 25 minutes in seconds
+            var display = document.getElementById('time');
+            var timerInterval;
+
+            function startTimer() {
+                timerInterval = setInterval(function() {
+                    var minutes = Math.floor(time / 60);
+                    var seconds = time % 60;
+
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                    display.textContent = minutes + ":" + seconds;
+
+                    if (--time < 0) {
+                        clearInterval(timerInterval);
+                        alert("Time's up!");
+                    }
+                }, 1000);
+            }
+
+            document.getElementById('startButton').addEventListener('click', function() {
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    time = 1500; // reset to 25 minutes
+                }
+                startTimer();
+            });
+        }
+
+        CountDownTimer();
+    </script>
+</body>
+</html>
