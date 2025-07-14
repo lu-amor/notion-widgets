@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Weeks Left</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arsenal', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffffff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            grid-gap: 15px;
+        }
+
+        .cell {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Estilo oculto del checkbox nativo */
+        .cell input[type="checkbox"] {
+            display: none;
+        }
+
+        /* Estilo visual del checkbox */
+        .custom-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #aaa;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Estilo cuando está marcado */
+        .cell input[type="checkbox"]:checked + .custom-checkbox {
+            background-color: #FCCAE1;
+            border-color: #FCCAE1;
+        }
+
+        /* Check mark (✔) */
+        .custom-checkbox::after {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 8px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            opacity: 0;
+            transform: rotate(45deg);
+        }
+
+        .cell input[type="checkbox"]:checked + .custom-checkbox::after {
+            opacity: 1;
+        }
+
+        .cell label.number {
+            margin-top: 5px;
+            font-size: 16px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid" id="grid"></div>
+
+    <script>
+        const startDate = new Date("2025-06-11");
+        const endDate = new Date("2025-12-06");
+        const today = new Date();
+
+        const fridays = [];
+        let current = new Date(startDate);
+        while (current <= endDate) {
+        fridays.push(new Date(current));
+        current.setDate(current.getDate() + 7);
+        }
+
+        const completedCount = fridays.filter(date => today >= date).length;
+
+        const grid = document.getElementById("grid");
+
+        for (let i = 1; i <= 16; i++) {
+            const cell = document.createElement("div");
+            cell.className = "cell";
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = `check-${i}`;
+            checkbox.disabled = true;
+            if (i <= completedCount) checkbox.checked = true;
+
+            const custom = document.createElement("label");
+            custom.className = "custom-checkbox";
+            custom.setAttribute("for", `check-${i}`);
+
+            const number = document.createElement("label");
+            number.className = "number";
+            number.textContent = i;
+
+            cell.appendChild(checkbox);
+            cell.appendChild(custom);
+            cell.appendChild(number);
+            grid.appendChild(cell);
+        }
+    </script>
+</body>
+</html>
